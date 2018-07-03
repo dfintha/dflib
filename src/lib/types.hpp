@@ -169,7 +169,7 @@ template <typename T>                                                          \
 class has_method_##name##_##suffix {                                           \
     template <typename C>                                                      \
     static constexpr auto check(C) ->                                          \
-        evaluable<decltype(std::declval<C>().name(__VA_ARGS__))>;              \
+        helpers::evaluable<decltype(std::declval<C>().name(__VA_ARGS__))>;     \
     static constexpr std::false_type check(...);                               \
                                                                                \
 public:                                                                        \
@@ -218,7 +218,7 @@ template <typename T>                                                          \
 class has_member_##name {                                                      \
     template <typename C>                                                      \
     static constexpr auto check(C) ->                                          \
-            evaluable<decltype(std::declval<C>().name)>;                       \
+            helpers::evaluable<decltype(std::declval<C>().name)>;              \
     static constexpr std::false_type check(...);                               \
                                                                                \
 public:                                                                        \
@@ -256,7 +256,7 @@ template <typename T>                                                          \
 class name {                                                                   \
     template <typename df_dummy_t>                                             \
     static constexpr auto check(df_dummy_t) ->                                 \
-        evaluable<decltype(__VA_ARGS__)>;                                      \
+        helpers::evaluable<decltype(__VA_ARGS__)>;                             \
     static constexpr auto check(...) ->                                        \
         std::false_type;                                                       \
 public:                                                                        \
