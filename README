@@ -1,0 +1,41 @@
+
+The dflib Generic-Purpose Experimental Library
+==============================================
+
+This collection of classes and utilities were originally made as I was
+experimenting with what can I do in C++. The parts that I managed to hoard
+over time then were made into this "library", and were partially rewritten
+and improved. Before this repository was made, its contents were scattered
+amongst my older repositories and snippets among my documents.
+
+Most of the headers don't have a proper (or any) test. I plan to make both
+proper test suites, and a sufficient documentation for them in the near future.
+
+The library uses C++17 features, so you will need a compiler that supports it.
+The makefile and test system is custom-built. Works with standard C++17 and GNU
+Make, and should be platform-independent.
+
+The "library" currently consists of the following header files:
+- Circular iteration wrapper (circulator.hpp).
+- Shared comparison function (comparable.hpp).
+- Some console color settings (console.hpp).
+- Dependant value on another value, lazy calculation if const (dependant.hpp).
+- Documentation types and macros (documentation.hpp).
+- Easy interface for flag bit management (flagset.hpp).
+- Compile-time template meta-lists (metalist.hpp).
+- Number wrapper for proper equality checking (number.hpp).
+- RAII adapter for resources (resource.hpp).
+- Cached, type-agnostic fibonacci and factorial functions (series.hpp).
+- String functionality extensions (strings.hpp).
+- Type trait extensions (types.hpp).
+- Miscellaneous utility functionalities (utilities.hpp).
+
+Each header file has a separator line, which provides a visual separator between
+interface and implementation. Even though declarations may appear twice, and
+extra macroes may be introduced, I've concluded this way the headers are much
+more readable.
+
+The project falls under the MIT license. I can't guarantee everything will work
+the way you would expect them to do so. Keep in mind, I've made this as part of
+my hobby, and not for use in production code. However, I always try to produce
+quality code. As such, constructive criticism is welcome.
