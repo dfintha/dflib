@@ -69,7 +69,7 @@ namespace df {
         static_assert(std::is_same_v<typename String::value_type, Char>);
         using Traits = std::char_traits<Char>;
         const size_t length = Traits::length(values);
-        for (size_t i = self.length() - 1; i >= 0; --i) {
+        for (size_t i = self.length() - 1; i != size_t(-1); --i) {
             if (Traits::find(values, length, self[i]) == nullptr)
                 return i;
         }
@@ -81,7 +81,7 @@ namespace df {
         static_assert(std::is_same_v<typename String::value_type, Char>);
         using Traits = std::char_traits<Char>;
         const size_t length = Traits::length(values);
-        for (size_t i = self.length() - 1; i >= 0; --i) {
+        for (size_t i = self.length() - 1; i != size_t(-1); --i) {
             if (!Traits::find(values, length, self[i]) == nullptr)
                 return i;
         }
