@@ -18,7 +18,7 @@ namespace df {
     using array_observer_ptr = Type *;
 
     template <typename Type>
-    using not_null_ptr = Type *;
+    using not_null = Type;
 }
 
 #define df_unused_variable(variable) (void)(variable)
