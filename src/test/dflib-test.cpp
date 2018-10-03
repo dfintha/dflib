@@ -3,6 +3,7 @@
 #include "lib/circulator.hpp"
 #include "lib/comparable.hpp"
 #include "lib/console.hpp"
+#include "lib/delegate.hpp"
 #include "lib/dependant.hpp"
 #include "lib/documentation.hpp"
 #include "lib/flagset.hpp"
