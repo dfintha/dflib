@@ -19,6 +19,7 @@ The "library" currently consists of the following header files:
 - Circular iteration wrapper (circulator.hpp).
 - Shared comparison function (comparable.hpp).
 - Some console color settings (console.hpp).
+- C#-like delegates, function-pointer lists (delegate.hpp).
 - Dependant value on another value, lazy calculation if const (dependant.hpp).
 - Documentation types and macros (documentation.hpp).
 - Easy interface for flag bit management (flagset.hpp).
