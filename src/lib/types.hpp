@@ -1,7 +1,13 @@
 #if !defined(DFLIB_TYPES)
 #define DFLIB_TYPES
 
+#include <string>
 #include <type_traits>
+#include <typeinfo>
+
+#if defined(__clang__) || defined(__GNUC__)
+#include <cxxabi.h>
+#endif
 
 namespace df {
     template <typename Type>
@@ -45,6 +51,9 @@ namespace df {
 
     template <typename Type>
     using iterator_of_t = typename iterator_of<Type>::type;
+
+    template <typename Type>
+    std::string typename_of();
 }
 
 #define df_reflect_method(name, suffix, ...) \
@@ -158,6 +167,29 @@ namespace df {
 
         static constexpr const bool valid = !std::is_void<type>::value;
     };
+
+    template <typename Type>
+    std::string typename_of() {
+        const std::type_info& type = typeid(std::declval<Type>());
+        std::string name = type.name();
+
+#if defined(__clang__) || defined(__GNUC__)
+        int dummy;
+        const char *c_str = name.c_str();
+        char *demangled = abi::__cxa_demangle(c_str, nullptr, nullptr, &dummy);
+        name = demangled;
+        std::free(demangled);
+#endif
+
+        while (true) {
+            const size_t pos = name.find("> >");
+            if (pos == std::string::npos)
+                break;
+            name.replace(pos, 3, ">>");
+        }
+
+        return name;
+    }
 }
 
 #if defined(__df_reflect_method)
