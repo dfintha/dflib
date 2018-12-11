@@ -1,5 +1,6 @@
 #include "test/dftest.hpp"
 
+#include "lib/approx.hpp"
 #include "lib/circulator.hpp"
 #include "lib/comparable.hpp"
 #include "lib/console.hpp"

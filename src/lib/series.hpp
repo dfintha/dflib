@@ -10,6 +10,9 @@ namespace df {
     template <typename Integer>
     Integer factorial(Integer index);
 
+#define df_create_series(name, initial_cache, expression) \
+    __df_create_series(name, initial_cache, expression)
+
     // ------------------------------------------------------------------ //
 
     template <typename Integer>
@@ -34,6 +37,19 @@ namespace df {
             values[index] = index * factorial(index - 1);
         return values[index];
     }
+}
+
+#define __df_create_series(name, initial_cache, expression)                 \
+namespace df {                                                              \
+    template <typename Integer>                                             \
+    Integer name(Integer n) {                                               \
+        static std::vector<Integer> cache initial_cache;                    \
+        if (cache.size() <= std::size_t(n))                                 \
+            cache.resize(n + 1, Integer(0));                                \
+        if (cache[n] == Integer(0))                                         \
+            cache[n] = expression;                                          \
+        return cache[n];                                                    \
+    }                                                                       \
 }
 
 #endif

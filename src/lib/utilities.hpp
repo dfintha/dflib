@@ -1,10 +1,13 @@
 #if !defined(DFLIB_UTILITIES)
 #define DFLIB_UTILITIES
 
+#include <clocale>
 #include <cstddef>
 #include <cstring>
 #include <functional>
 #include <iostream>
+#include <string>
+#include <type_traits>
 #include <utility>
 
 namespace df {
@@ -33,6 +36,9 @@ namespace df {
 
     template <typename Type>
     void clear(Type& instance);
+
+    template <typename Size>
+    std::string size_to_string(Size size);
 
     // ------------------------------------------------------------------ //
 
@@ -104,6 +110,36 @@ namespace df {
         static constexpr const bool pod_type = std::is_pod<Type>::value;
         static_assert(!pointer_type && pod_type);
         std::memset(&instance, 0x00, sizeof(Type));
+    }
+
+    template <typename Size>
+    std::string size_to_string(Size size) {
+        static_assert(std::is_integral<Size>::value, 
+                      "The size must be an integer!");
+
+        static constexpr const char prefixes[] = " KMGTPEZY";
+        static constexpr const int max = sizeof(prefixes) - 1;
+        static constexpr const int step = 1024;
+        static char buffer[16];
+
+        double work = double(size);
+        short index = 0;
+        while (work >= step && index < max) {
+            work /= step;
+            ++index;
+        }
+
+        const char *format = (index > 0) ? "%.2f %ciB" : "%.2f B";
+        snprintf(buffer, 15, format, work, prefixes[index]);
+
+        char *decimal = strstr(buffer, ".");
+        if (decimal != nullptr) {
+            std::setlocale(LC_NUMERIC, "");
+            struct lconv *lc = std::localeconv();
+            *decimal = *lc->decimal_point;
+        }
+
+        return std::string(buffer);
     }
 }
 

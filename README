@@ -16,6 +16,7 @@ The makefile and test system is custom-built. Works with standard C++17 and GNU
 Make, and should be platform-independent.
 
 The "library" currently consists of the following header files:
+- Some mathematical functions approximated by sums (approx.hpp).
 - Circular iteration wrapper (circulator.hpp).
 - Shared comparison function (comparable.hpp).
 - Some console color settings (console.hpp).
