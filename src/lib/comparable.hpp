@@ -11,16 +11,12 @@ namespace df {
     template <typename Type>
     class comparable {
     public:
-        virtual ~comparable() noexcept = default;
         inline bool operator==(const comparable& rhs) const;
         inline bool operator!=(const comparable& rhs) const;
         inline bool operator<=(const comparable& rhs) const;
         inline bool operator>=(const comparable& rhs) const;
         inline bool operator<(const comparable& rhs) const;
         inline bool operator>(const comparable& rhs) const;
-
-    private:
-        virtual comparison_result compare(const comparable& rhs) const = 0;
     };
 
     //--------------------------------------------------------------------//
